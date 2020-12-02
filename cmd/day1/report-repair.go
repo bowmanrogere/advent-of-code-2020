@@ -1,29 +1,20 @@
 package main
 
 import (
-	"bufio"
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
-	"os"
 	"strconv"
 )
 
 func readExpenseReport() []int {
-	values := make([]int, 0)
-
-	f, err := os.Open("expense-report.txt")
+	lines, err := internal.ReadFile("expense-report.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-
-	for scanner.Scan() {
-		val, err := strconv.Atoi(scanner.Text())
-		if err != nil {
-			log.Fatal(err)
-		}
+	values := make([]int, 0)
+	for _, line := range lines {
+		val, _ := strconv.Atoi(line)
 		values = append(values, val)
 	}
 
