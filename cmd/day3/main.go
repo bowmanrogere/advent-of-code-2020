@@ -55,7 +55,7 @@ func findTreesForSlope(lines []string, slope *Slope) int {
 	treesEncountered := 0
 	for lineIndex, line := range lines {
 		if lineIndex % slope.y == 0 {
-			if lineIndex > 0 && lineIndex % slope.y == 0 {
+			if lineIndex > 0 {
 				if string(line[idx % length]) == "#" {
 					treesEncountered++
 				}
