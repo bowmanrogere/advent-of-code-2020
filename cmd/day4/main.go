@@ -12,16 +12,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	puzzle1(lines)
+	println(fmt.Sprintf("Puzzle 1 # valid passports: %d", countValidPassports(lines, false)))
+	println(fmt.Sprintf("Puzzle 2 # valid passports: %d", countValidPassports(lines, true)))
 }
 
-func puzzle1(lines []string) {
+func countValidPassports(lines []string, validate bool) int {
 	validPassports := 0
 
 	passport := &internal.Passport{}
 	for idx, line := range lines {
 		if line != "" {
-			passport.AddInformation(line)
+			passport.AddInformation(line, validate)
 		}
 
 		if line == "" || idx == len(lines) - 1 {
@@ -32,5 +33,5 @@ func puzzle1(lines []string) {
 		}
 	}
 
-	println(fmt.Sprintf("Puzzle 1 # valid passports: %d", validPassports))
+	return validPassports
 }
