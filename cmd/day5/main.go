@@ -8,14 +8,6 @@ import (
 )
 
 func main() {
-	//boardingPass, err := internal.NewBoardingPass("FBFBBFFRLR")
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//
-	//println(fmt.Sprintf("Boarding Pass: %+v", *boardingPass))
-	//println(fmt.Sprintf("Seat ID: %d", boardingPass.SeatID()))
-
 	lines, err := internal.ReadFile("boarding-passes.txt")
 	if err != nil {
 		log.Fatal(err)
