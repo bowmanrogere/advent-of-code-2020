@@ -40,7 +40,7 @@ func decode(code string, values []int, upChar string) int {
 			} else {
 				index = lower
 			}
-			continue
+			break
 		}
 
 		index = ((upper + (upper % 2)) - lower) / 2 + lower
