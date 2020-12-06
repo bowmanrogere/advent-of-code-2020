@@ -14,10 +14,11 @@ func main() {
 	}
 
 	puzzle1(lines)
+	puzzle2(lines)
 }
 
 func puzzle1(lines []string) {
-	groupYeses := make([]string, 0)
+	uniqueAnswers := make([]string, 0)
 	yeses := ""
 	for idx, line := range lines {
 		if line != "" {
@@ -29,15 +30,54 @@ func puzzle1(lines []string) {
 		}
 
 		if line == "" || idx == len(lines) - 1 {
-			groupYeses = append(groupYeses, yeses)
+			uniqueAnswers = append(uniqueAnswers, yeses)
 			yeses = ""
 		}
 	}
 
 	count := 0
-	for _, answer := range groupYeses {
+	for _, answer := range uniqueAnswers {
 		count += len(answer)
 	}
 
-	println(fmt.Sprintf("Sum of counts: %d", count))
+	println(fmt.Sprintf("Puzzle 1 sum of counts: %d", count))
+}
+
+func puzzle2(lines []string) {
+	groupAnswers := make([]string, 0)
+	allAnswerYesByGroup := make([]string, 0)
+	for idx, line := range lines {
+		if line != "" {
+			groupAnswers = append(groupAnswers, line)
+		}
+
+		if line == "" || idx == len(lines) - 1 {
+			allAnswerYes := ""
+			for _, c := range groupAnswers[0] {
+				if allContains(groupAnswers, string(c)) {
+					allAnswerYes += string(c)
+				}
+			}
+
+			allAnswerYesByGroup = append(allAnswerYesByGroup, allAnswerYes)
+			groupAnswers = make([]string, 0)
+		}
+	}
+
+	count := 0
+	for _, answer := range allAnswerYesByGroup {
+		count += len(answer)
+	}
+
+	println(fmt.Sprintf("Puzzle2 sum of counts: %d", count))
+
+}
+
+func allContains(answers []string, char string) bool {
+	for _, answer := range answers {
+		if !strings.Contains(answer, char) {
+			return false
+		}
+	}
+	return true
 }
