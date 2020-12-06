@@ -35,10 +35,7 @@ func puzzle1(lines []string) {
 		}
 	}
 
-	count := 0
-	for _, answer := range uniqueAnswers {
-		count += len(answer)
-	}
+	count := sumAnswers(uniqueAnswers)
 
 	println(fmt.Sprintf("Puzzle 1 sum of counts: %d", count))
 }
@@ -64,13 +61,19 @@ func puzzle2(lines []string) {
 		}
 	}
 
-	count := 0
-	for _, answer := range allAnswerYesByGroup {
-		count += len(answer)
-	}
+	count := sumAnswers(allAnswerYesByGroup)
 
 	println(fmt.Sprintf("Puzzle2 sum of counts: %d", count))
 
+}
+
+func sumAnswers(answers []string) int {
+	count := 0
+	for _, answer := range answers {
+		count += len(answer)
+	}
+
+	return count
 }
 
 func allContains(answers []string, char string) bool {
