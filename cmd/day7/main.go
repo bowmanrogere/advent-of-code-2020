@@ -14,7 +14,7 @@ var (
 )
 
 func main() {
-	lines, err := internal.ReadFile("/Users/t24974a/Development/advent-of-code-2020/cmd/day7/rules.txt")
+	lines, err := internal.ReadFile("rules.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
