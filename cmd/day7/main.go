@@ -5,6 +5,7 @@ import (
 	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -13,15 +14,37 @@ var (
 )
 
 func main() {
-	lines, err := internal.ReadFile("rules.txt")
+	lines, err := internal.ReadFile("/Users/t24974a/Development/advent-of-code-2020/cmd/day7/rules.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	puzzle1(lines)
+	puzzle2(lines)
 }
 
 func puzzle1(lines []string) {
+	bags := getBags(lines)
+
+	contains := make([]string, 0)
+	for bag := range bags {
+		if canContainShinyGoldBag(bags, bag) {
+			contains = append(contains, bag)
+		}
+	}
+
+	println(fmt.Sprintf("Puzzle #1: %d", len(contains)))
+}
+
+func puzzle2(lines []string) {
+	bags := getBags(lines)
+
+	count := countBags(bags, "shiny gold")
+
+	println(fmt.Sprintf("Puzzle 2: %d", count))
+}
+
+func getBags(lines []string) map[string][]string {
 	bags := make(map[string][]string)
 
 	for _, line := range lines {
@@ -29,17 +52,7 @@ func puzzle1(lines []string) {
 		bags[parts[0]] = strings.Split(strings.ReplaceAll(strings.ReplaceAll(parts[1], ".", ""), "no other bags", ""), ", ")
 	}
 
-	contains := make([]string, 0)
-	doesntContain := make([]string, 0)
-	for bag := range bags {
-		if canContainShinyGoldBag(bags, bag) {
-			contains = append(contains, bag)
-		} else {
-			doesntContain = append(doesntContain, bag)
-		}
-	}
-
-	println(fmt.Sprintf("Puzzle #1: %d", len(contains)))
+	return bags
 }
 
 func canContainShinyGoldBag(bags map[string][]string, color string) bool {
@@ -63,8 +76,21 @@ func canContainShinyGoldBag(bags map[string][]string, color string) bool {
 				}
 			}
 		}
-
 	}
 
 	return canContain
+}
+
+func countBags(bags map[string][]string, color string) int {
+	count := 0
+	for _, bag := range bags[color] {
+		matches := regex.FindStringSubmatch(bag)
+
+		if len(matches) > 0 {
+			numBags, _ := strconv.Atoi(matches[1])
+			count += numBags + numBags * countBags(bags, matches[2])
+		}
+	}
+
+	return count
 }
