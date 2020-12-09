@@ -1,22 +1,22 @@
 package internal
 
 var (
-	possibleRows = getPossibleRows()
+	possibleRows    = getPossibleRows()
 	possibleColumns = getPossibleColumns()
 )
 
 type BoardingPass struct {
-	Row int
+	Row    int
 	Column int
 }
 
 func (b *BoardingPass) SeatID() int {
-	return b.Row * 8 + b.Column
+	return b.Row*8 + b.Column
 }
 
 func NewBoardingPass(code string) *BoardingPass {
 	return &BoardingPass{
-		Row: decodeRow(code[0:7]),
+		Row:    decodeRow(code[0:7]),
 		Column: decodeColumn(code[7:]),
 	}
 }
@@ -34,7 +34,7 @@ func decode(code string, values []int, upChar string) int {
 	upper := len(values) - 1
 	lower := 0
 	for codeIndex, c := range code {
-		if codeIndex == len(code) - 1 {
+		if codeIndex == len(code)-1 {
 			if string(c) == upChar {
 				index = upper
 			} else {
@@ -43,7 +43,7 @@ func decode(code string, values []int, upChar string) int {
 			break
 		}
 
-		index = ((upper + (upper % 2)) - lower) / 2 + lower
+		index = ((upper+(upper%2))-lower)/2 + lower
 		if string(c) == upChar {
 			lower = index
 		} else {
@@ -57,7 +57,7 @@ func decode(code string, values []int, upChar string) int {
 
 func getPossibleRows() []int {
 	possibleRows := make([]int, 0)
-	for i:=0; i < 128; i++ {
+	for i := 0; i < 128; i++ {
 		possibleRows = append(possibleRows, i)
 	}
 	return possibleRows
@@ -65,7 +65,7 @@ func getPossibleRows() []int {
 
 func getPossibleColumns() []int {
 	possibleColumns := make([]int, 0)
-	for i:=0; i < 8; i++ {
+	for i := 0; i < 8; i++ {
 		possibleColumns = append(possibleColumns, i)
 	}
 	return possibleColumns

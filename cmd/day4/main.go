@@ -25,7 +25,7 @@ func countValidPassports(lines []string, validate bool) int {
 			passport.AddInformation(line, validate)
 		}
 
-		if line == "" || idx == len(lines) - 1 {
+		if line == "" || idx == len(lines)-1 {
 			if passport.Valid() {
 				validPassports++
 			}

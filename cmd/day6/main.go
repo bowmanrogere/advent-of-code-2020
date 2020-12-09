@@ -29,7 +29,7 @@ func puzzle1(lines []string) {
 			}
 		}
 
-		if line == "" || idx == len(lines) - 1 {
+		if line == "" || idx == len(lines)-1 {
 			uniqueAnswers = append(uniqueAnswers, yeses)
 			yeses = ""
 		}
@@ -48,7 +48,7 @@ func puzzle2(lines []string) {
 			groupAnswers = append(groupAnswers, line)
 		}
 
-		if line == "" || idx == len(lines) - 1 {
+		if line == "" || idx == len(lines)-1 {
 			allAnswerYes := ""
 			for _, c := range groupAnswers[0] {
 				if allContains(groupAnswers, string(c)) {

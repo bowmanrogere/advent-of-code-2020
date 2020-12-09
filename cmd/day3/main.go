@@ -31,12 +31,12 @@ func puzzle1(lines []string) {
 }
 
 func puzzle2(lines []string) {
-	slopes := []*Slope {
-		{ x: 1, y: 1 },
-		{ x: 3, y: 1 },
-		{ x: 5, y: 1 },
-		{ x: 7, y: 1 },
-		{ x: 1, y: 2 },
+	slopes := []*Slope{
+		{x: 1, y: 1},
+		{x: 3, y: 1},
+		{x: 5, y: 1},
+		{x: 7, y: 1},
+		{x: 1, y: 2},
 	}
 
 	answer := 1
@@ -54,9 +54,9 @@ func findTreesForSlope(lines []string, slope *Slope) int {
 	idx := 0
 	treesEncountered := 0
 	for lineIndex, line := range lines {
-		if lineIndex % slope.y == 0 {
+		if lineIndex%slope.y == 0 {
 			if lineIndex > 0 {
-				if string(line[idx % length]) == "#" {
+				if string(line[idx%length]) == "#" {
 					treesEncountered++
 				}
 			}

@@ -88,7 +88,7 @@ func countBags(bags map[string][]string, color string) int {
 
 		if len(matches) > 0 {
 			numBags, _ := strconv.Atoi(matches[1])
-			count += numBags + numBags * countBags(bags, matches[2])
+			count += numBags + numBags*countBags(bags, matches[2])
 		}
 	}
 

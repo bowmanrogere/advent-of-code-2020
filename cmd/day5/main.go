@@ -40,9 +40,9 @@ func puzzle2(lines []string) {
 			continue
 		}
 
-		seatBefore := seatIds[index - 1]
+		seatBefore := seatIds[index-1]
 
-		if id - 1 != seatBefore {
+		if id-1 != seatBefore {
 			mySeat = id - 1
 			break
 		}
@@ -59,5 +59,3 @@ func seatIds(lines []string) []int {
 	}
 	return seatIds
 }
-
-

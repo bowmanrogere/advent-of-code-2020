@@ -8,14 +8,14 @@ import (
 )
 
 type Passport struct {
-	BirthYear string
-	IssueYear string
+	BirthYear      string
+	IssueYear      string
 	ExpirationYear string
-	Height string
-	HairColor string
-	EyeColor string
-	PassportId string
-	CountryId string
+	Height         string
+	HairColor      string
+	EyeColor       string
+	PassportId     string
+	CountryId      string
 }
 
 func (p *Passport) AddInformation(info string, validate bool) {
@@ -68,7 +68,7 @@ func (p *Passport) AddInformation(info string, validate bool) {
 				p.PassportId = keyVal[1]
 			}
 		case "cid":
-			p.CountryId	= keyVal[1]
+			p.CountryId = keyVal[1]
 		}
 	}
 }
@@ -132,7 +132,6 @@ func parseHeight(height string) string {
 	if len(parts) == 0 {
 		return ""
 	}
-
 
 	if parts[2] == "cm" {
 		h, err := strconv.Atoi(parts[1])

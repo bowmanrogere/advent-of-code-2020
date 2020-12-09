@@ -25,7 +25,7 @@ func findTwo(expenseValues []int) {
 	valuesFound := false
 	for _, val1 := range expenseValues {
 		for _, val2 := range expenseValues {
-			if val1 + val2 == 2020 {
+			if val1+val2 == 2020 {
 				println(val1 * val2)
 				valuesFound = true
 				break
