@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
 	"sort"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 func main() {
@@ -23,6 +24,7 @@ func main() {
 func findInvalidCode(codes []int) int {
 	preamble := 25
 	invalidCode := 0
+
 	for i := preamble; i < len(codes); i++ {
 		foundSumInPrevious5 := false
 
@@ -33,6 +35,7 @@ func findInvalidCode(codes []int) int {
 					break
 				}
 			}
+
 			if foundSumInPrevious5 {
 				break
 			}
@@ -43,6 +46,7 @@ func findInvalidCode(codes []int) int {
 			break
 		}
 	}
+
 	return invalidCode
 }
 
@@ -52,19 +56,25 @@ func findEncryptionWeakness(codes []int, invalidCode int) int {
 	for i := 0; i < len(codes); i++ {
 		sum := 0
 		ints := make([]int, 0)
+
 		for j := i; j < len(codes); j++ {
 			sum += codes[j]
 			ints = append(ints, codes[j])
 			sort.Ints(ints)
+
 			if sum < invalidCode {
 				continue
 			}
+
 			if sum > invalidCode {
 				break
 			}
-			encryptionWeakness = ints[0] + ints[len(ints) - 1]
+
+			encryptionWeakness = ints[0] + ints[len(ints)-1]
+
 			break
 		}
+
 		if encryptionWeakness != -1 {
 			break
 		}

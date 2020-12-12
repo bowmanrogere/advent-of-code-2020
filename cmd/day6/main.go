@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
 	"strings"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 func main() {
@@ -20,6 +21,7 @@ func main() {
 func puzzle1(lines []string) {
 	uniqueAnswers := make([]string, 0)
 	yeses := ""
+
 	for idx, line := range lines {
 		if line != "" {
 			for _, c := range line {
@@ -43,6 +45,7 @@ func puzzle1(lines []string) {
 func puzzle2(lines []string) {
 	groupAnswers := make([]string, 0)
 	allAnswerYesByGroup := make([]string, 0)
+
 	for idx, line := range lines {
 		if line != "" {
 			groupAnswers = append(groupAnswers, line)
@@ -50,6 +53,7 @@ func puzzle2(lines []string) {
 
 		if line == "" || idx == len(lines)-1 {
 			allAnswerYes := ""
+
 			for _, c := range groupAnswers[0] {
 				if allContains(groupAnswers, string(c)) {
 					allAnswerYes += string(c)
@@ -64,7 +68,6 @@ func puzzle2(lines []string) {
 	count := sumAnswers(allAnswerYesByGroup)
 
 	println(fmt.Sprintf("Puzzle2 sum of counts: %d", count))
-
 }
 
 func sumAnswers(answers []string) int {
@@ -82,5 +85,6 @@ func allContains(answers []string, char string) bool {
 			return false
 		}
 	}
+
 	return true
 }

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
 	"strconv"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 func readExpenseReport() []int {
@@ -13,6 +14,7 @@ func readExpenseReport() []int {
 	}
 
 	values := make([]int, 0)
+
 	for _, line := range lines {
 		val, _ := strconv.Atoi(line)
 		values = append(values, val)
@@ -23,14 +25,18 @@ func readExpenseReport() []int {
 
 func findTwo(expenseValues []int) {
 	valuesFound := false
+
 	for _, val1 := range expenseValues {
 		for _, val2 := range expenseValues {
 			if val1+val2 == 2020 {
 				println(val1 * val2)
+
 				valuesFound = true
+
 				break
 			}
 		}
+
 		if valuesFound {
 			break
 		}
@@ -39,19 +45,24 @@ func findTwo(expenseValues []int) {
 
 func findThree(expenseValues []int) {
 	valuesFound := false
+
 	for _, val1 := range expenseValues {
 		for _, val2 := range expenseValues {
 			for _, val3 := range expenseValues {
 				if val1+val2+val3 == 2020 {
 					println(val1 * val2 * val3)
+
 					valuesFound = true
+
 					break
 				}
 			}
+
 			if valuesFound {
 				break
 			}
 		}
+
 		if valuesFound {
 			break
 		}

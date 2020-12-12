@@ -14,8 +14,8 @@ type Passport struct {
 	Height         string
 	HairColor      string
 	EyeColor       string
-	PassportId     string
-	CountryId      string
+	PassportID     string
+	CountryID      string
 }
 
 func (p *Passport) AddInformation(info string, validate bool) {
@@ -63,12 +63,12 @@ func (p *Passport) AddInformation(info string, validate bool) {
 			}
 		case "pid":
 			if validate {
-				p.PassportId = parsePassportId(keyVal[1])
+				p.PassportID = parsePassportID(keyVal[1])
 			} else {
-				p.PassportId = keyVal[1]
+				p.PassportID = keyVal[1]
 			}
 		case "cid":
-			p.CountryId = keyVal[1]
+			p.CountryID = keyVal[1]
 		}
 	}
 }
@@ -80,7 +80,7 @@ func (p *Passport) Valid() bool {
 		p.Height != "" &&
 		p.HairColor != "" &&
 		p.EyeColor != "" &&
-		p.PassportId != ""
+		p.PassportID != ""
 }
 
 func parseBirthYear(birthYear string) string {
@@ -182,11 +182,11 @@ func parseEyeColor(eyeColor string) string {
 	return ""
 }
 
-func parsePassportId(passportId string) string {
-	matched, err := regexp.MatchString("^[0-9]{9}$", passportId)
+func parsePassportID(passportID string) string {
+	matched, err := regexp.MatchString("^[0-9]{9}$", passportID)
 	if err != nil || !matched {
 		return ""
 	}
 
-	return passportId
+	return passportID
 }

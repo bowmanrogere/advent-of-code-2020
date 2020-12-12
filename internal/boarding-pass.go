@@ -33,6 +33,7 @@ func decode(code string, values []int, upChar string) int {
 	index := 0
 	upper := len(values) - 1
 	lower := 0
+
 	for codeIndex, c := range code {
 		if codeIndex == len(code)-1 {
 			if string(c) == upChar {
@@ -40,14 +41,15 @@ func decode(code string, values []int, upChar string) int {
 			} else {
 				index = lower
 			}
+
 			break
 		}
 
 		index = ((upper+(upper%2))-lower)/2 + lower
+
 		if string(c) == upChar {
 			lower = index
 		} else {
-			//lower = upper
 			upper = index - (upper % 2)
 		}
 	}
@@ -60,6 +62,7 @@ func getPossibleRows() []int {
 	for i := 0; i < 128; i++ {
 		possibleRows = append(possibleRows, i)
 	}
+
 	return possibleRows
 }
 
@@ -68,5 +71,6 @@ func getPossibleColumns() []int {
 	for i := 0; i < 8; i++ {
 		possibleColumns = append(possibleColumns, i)
 	}
+
 	return possibleColumns
 }

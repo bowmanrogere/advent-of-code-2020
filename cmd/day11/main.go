@@ -27,6 +27,7 @@ func puzzle1(seats []string) {
 	changed := true
 	for changed {
 		occupiedSeats := make([]string, 0)
+
 		for row := 0; row < len(seats); row++ {
 			rowVal := seats[row]
 			newRowVal := ""
@@ -46,14 +47,17 @@ func puzzle1(seats []string) {
 					newRowVal += string(rowVal[col])
 				}
 			}
+
 			occupiedSeats = append(occupiedSeats, newRowVal)
 		}
+
 		changed = hasChanged(seats, occupiedSeats)
 		copy(seats, occupiedSeats)
 	}
 
 	// count number of occupied seats
 	occupiedSeats := 0
+
 	for _, row := range seats {
 		for _, seat := range row {
 			if string(seat) == "#" {
@@ -69,13 +73,17 @@ func adjacentSeats(row, col int, seats []string) int {
 	above := 0
 	current := 0
 	below := 0
+
 	if row > 0 {
-		above = checkSeats(col, seats[row - 1], true)
+		above = checkSeats(col, seats[row-1], true)
 	}
+
 	current = checkSeats(col, seats[row], false)
-	if row < len(seats) - 1 {
-		below = checkSeats(col, seats[row + 1], true)
+
+	if row < len(seats)-1 {
+		below = checkSeats(col, seats[row+1], true)
 	}
+
 	return above + current + below
 }
 
@@ -83,21 +91,25 @@ func checkSeats(index int, seats string, checkIndex bool) int {
 	left := 0
 	center := 0
 	right := 0
+
 	if index > 0 {
-		if seatOccupied(index - 1, seats) {
+		if seatOccupied(index-1, seats) {
 			left++
 		}
 	}
+
 	if checkIndex {
 		if seatOccupied(index, seats) {
 			center++
 		}
 	}
-	if index < len(seats) - 1 {
-		if seatOccupied(index + 1, seats) {
+
+	if index < len(seats)-1 {
+		if seatOccupied(index+1, seats) {
 			right++
 		}
 	}
+
 	return left + center + right
 }
 
@@ -111,6 +123,7 @@ func hasChanged(original, new []string) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -119,9 +132,11 @@ func puzzle2(seats []string) {
 	changed := true
 	for changed {
 		occupiedSeats := make([]string, 0)
+
 		for row := 0; row < len(seats); row++ {
 			rowVal := seats[row]
 			newRowVal := ""
+
 			// check each position
 			for col := 0; col < len(rowVal); col++ {
 				if string(rowVal[col]) == "." {
@@ -138,14 +153,17 @@ func puzzle2(seats []string) {
 					newRowVal += string(rowVal[col])
 				}
 			}
+
 			occupiedSeats = append(occupiedSeats, newRowVal)
 		}
+
 		changed = hasChanged(seats, occupiedSeats)
 		copy(seats, occupiedSeats)
 	}
 
 	// count number of occupied seats
 	occupiedSeats := 0
+
 	for _, row := range seats {
 		for _, seat := range row {
 			if string(seat) == "#" {
@@ -173,36 +191,43 @@ func firstAdjacentSeats(row, col int, seats []string) int {
 				aboveLeft++
 			}
 		}
-		if checkAbove(row - 1, col, seats) {
+
+		if checkAbove(row-1, col, seats) {
 			above++
 		}
-		if col < len(seats[row]) - 1 {
-			if checkAboveRight(row - 1, col + 1, seats) {
+
+		if col < len(seats[row])-1 {
+			if checkAboveRight(row-1, col+1, seats) {
 				aboveRight++
 			}
 		}
 	}
+
 	if col > 0 {
-		if checkLeft(col - 1, seats[row]) {
+		if checkLeft(col-1, seats[row]) {
 			left++
 		}
 	}
-	if col < len(seats[row]) - 1 {
-		if checkRight(col + 1, seats[row]) {
+
+	if col < len(seats[row])-1 {
+		if checkRight(col+1, seats[row]) {
 			right++
 		}
 	}
-	if row < len(seats) - 1 {
+
+	if row < len(seats)-1 {
 		if col > 0 {
-			if checkBelowLeft(row + 1, col - 1, seats) {
+			if checkBelowLeft(row+1, col-1, seats) {
 				belowLeft++
 			}
 		}
-		if checkBelow(row + 1, col, seats) {
+
+		if checkBelow(row+1, col, seats) {
 			below++
 		}
-		if col < len(seats[row]) - 1 {
-			if checkBelowRight(row + 1, col + 1, seats) {
+
+		if col < len(seats[row])-1 {
+			if checkBelowRight(row+1, col+1, seats) {
 				belowRight++
 			}
 		}
@@ -215,61 +240,66 @@ func checkAbove(row, col int, seats []string) bool {
 	if row == 0 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkAbove(row - 1, col, seats)
+
+	return checkAbove(row-1, col, seats)
 }
 
 func checkBelow(row, col int, seats []string) bool {
-	if row == len(seats) - 1 || string(seats[row][col]) != "." {
+	if row == len(seats)-1 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkBelow(row + 1, col, seats)
+
+	return checkBelow(row+1, col, seats)
 }
 
 func checkLeft(col int, seats string) bool {
 	if col == 0 || string(seats[col]) != "." {
 		return seatOccupied(col, seats)
 	}
-	return checkLeft(col - 1, seats)
+
+	return checkLeft(col-1, seats)
 }
 
 func checkRight(col int, seats string) bool {
-	if col == len(seats) - 1 || string(seats[col]) != "." {
+	if col == len(seats)-1 || string(seats[col]) != "." {
 		return seatOccupied(col, seats)
 	}
-	return checkRight(col + 1, seats)
+
+	return checkRight(col+1, seats)
 }
 
 func checkAboveLeft(row, col int, seats []string) bool {
 	if row == 0 || col == 0 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkAboveLeft(row - 1, col - 1, seats)
+
+	return checkAboveLeft(row-1, col-1, seats)
 }
 
 func checkAboveRight(row, col int, seats []string) bool {
-	if row == 0 || col == len(seats[row]) - 1 || string(seats[row][col]) != "." {
+	if row == 0 || col == len(seats[row])-1 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkAboveRight(row - 1, col + 1, seats)
+
+	return checkAboveRight(row-1, col+1, seats)
 }
 
 func checkBelowLeft(row, col int, seats []string) bool {
-	if row == len(seats) - 1 || col == 0 || string(seats[row][col]) != "." {
+	if row == len(seats)-1 || col == 0 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkBelowLeft(row + 1, col - 1, seats)
+
+	return checkBelowLeft(row+1, col-1, seats)
 }
 
 func checkBelowRight(row, col int, seats []string) bool {
-	if row == len(seats) - 1 || col == len(seats[row]) - 1 || string(seats[row][col]) != "." {
+	if row == len(seats)-1 || col == len(seats[row])-1 || string(seats[row][col]) != "." {
 		return seatOccupied(col, seats[row])
 	}
-	return checkBelowRight(row + 1, col + 1, seats)
+
+	return checkBelowRight(row+1, col+1, seats)
 }
 
 func seatOccupied(seatNumber int, seats string) bool {
-	if string(seats[seatNumber]) == "#" {
-		return true
-	}
-	return false
+	return string(seats[seatNumber]) == "#"
 }

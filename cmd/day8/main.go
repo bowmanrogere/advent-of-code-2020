@@ -28,6 +28,7 @@ func puzzle1(lines []string) {
 
 	index := 0
 	acc = 0
+
 	for index < len(lines) {
 		if internal.ContainsInt(executed, index) {
 			break
@@ -43,13 +44,16 @@ func puzzle1(lines []string) {
 
 func puzzle2(lines []string) {
 	successful := false
+
 	for idx, line := range lines {
 		if strings.HasPrefix(line, "jmp") || strings.HasPrefix(line, "nop") {
 			instructionsCopy := make([]string, len(lines))
 			copy(instructionsCopy, lines)
+
 			if strings.HasPrefix(line, "jmp") {
 				instructionsCopy[idx] = strings.ReplaceAll(line, "jmp", "nop")
 			}
+
 			if strings.HasPrefix(line, "nop") {
 				instructionsCopy[idx] = strings.ReplaceAll(line, "nop", "jmp")
 			}
@@ -58,6 +62,7 @@ func puzzle2(lines []string) {
 			index := 0
 			loopDetected := false
 			acc = 0
+
 			for index < len(instructionsCopy) {
 				if internal.ContainsInt(history, index) {
 					loopDetected = true
@@ -68,6 +73,7 @@ func puzzle2(lines []string) {
 				history = append(history, index)
 				index = newIndex
 			}
+
 			successful = !loopDetected
 		}
 

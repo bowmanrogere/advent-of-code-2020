@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 var (
-	regex = regexp.MustCompile("^([0-9]+) ([a-zA-z\\s]+) bags?$")
+	regex = regexp.MustCompile(`^([0-9]+) ([a-zA-z\s]+) bags?$`)
 )
 
 func main() {
@@ -27,6 +28,7 @@ func puzzle1(lines []string) {
 	bags := getBags(lines)
 
 	contains := make([]string, 0)
+
 	for bag := range bags {
 		if canContainShinyGoldBag(bags, bag) {
 			contains = append(contains, bag)
@@ -83,6 +85,7 @@ func canContainShinyGoldBag(bags map[string][]string, color string) bool {
 
 func countBags(bags map[string][]string, color string) int {
 	count := 0
+
 	for _, bag := range bags[color] {
 		matches := regex.FindStringSubmatch(bag)
 

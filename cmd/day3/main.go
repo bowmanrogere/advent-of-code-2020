@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 type Slope struct {
@@ -53,6 +54,7 @@ func findTreesForSlope(lines []string, slope *Slope) int {
 
 	idx := 0
 	treesEncountered := 0
+
 	for lineIndex, line := range lines {
 		if lineIndex%slope.y == 0 {
 			if lineIndex > 0 {

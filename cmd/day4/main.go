@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/bowmanrogere/advent-of-code-2020/internal"
 	"log"
+
+	"github.com/bowmanrogere/advent-of-code-2020/internal"
 )
 
 func main() {
@@ -20,6 +21,7 @@ func countValidPassports(lines []string, validate bool) int {
 	validPassports := 0
 
 	passport := &internal.Passport{}
+
 	for idx, line := range lines {
 		if line != "" {
 			passport.AddInformation(line, validate)
@@ -29,6 +31,7 @@ func countValidPassports(lines []string, validate bool) int {
 			if passport.Valid() {
 				validPassports++
 			}
+
 			passport = &internal.Passport{}
 		}
 	}
