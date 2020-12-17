@@ -80,6 +80,7 @@ func (f *Ferry) Sail() {
 func (f *Ferry) parseDirection(direction string) (int, int) {
 	parts := f.directionRegex.FindStringSubmatch(direction)
 	d := 0
+
 	switch parts[1] {
 	case "N":
 		d = north
@@ -96,6 +97,8 @@ func (f *Ferry) parseDirection(direction string) (int, int) {
 	case "F":
 		d = forward
 	}
+
 	u, _ := strconv.Atoi(parts[2])
+
 	return d, u
 }
